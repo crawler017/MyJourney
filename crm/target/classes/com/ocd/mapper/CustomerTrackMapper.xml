@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ocd.mapper.CustomerTrackMapper">
+    <select id="aaa" resultType="com.ocd.pojo.CustomerTrack">
+	SELECT * from customer_track
+</select>
+
+    <sql id="selectCustomerTrackListWhere">
+        <where>
+            <if test="customer_name != null" >
+                customer_name like "%"#{customer_name}"%"
+            </if>
+            <if test="customer_type != null" >
+                and customer_type = #{customer_type}
+            </if>
+        </where>
+    </sql>
+    <select id="selectCustomerTrackList" parameterType="com.ocd.pojo.CustomerTrack" resultType="com.ocd.pojo.CustomerTrack">
+        SELECT
+        id,
+        customer_name,
+        customer_type
+        FROM
+        customer_track
+        <include refid="selectCustomerTrackListWhere"/>
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+    <select id="selectCustomerTrackListCount" parameterType="com.ocd.pojo.CustomerTrack" resultType="int">
+        select count(*)
+        from customer_track
+        <!--		<include refid="selectCustomerTrackListWhere"/>-->
+    </select>
+
+    <select id="getCustomerTrackById" parameterType="long" resultType="com.ocd.pojo.CustomerTrack">
+		select * from customer_track where id = #{id}
+	</select>
+    <update id="updateCustomerTrack" parameterType="com.ocd.pojo.CustomerTrack">
+        update customer_track
+        <set>
+            <if test="customer_name!=null">
+                customer_name=#{customer_name},
+            </if>
+            <if test="customer_type!=null">
+                customer_type=#{customer_type},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="addCustomerTrack" parameterType="com.ocd.pojo.CustomerTrack">
+        insert customer_track
+        <set>
+            <if test="customer_name!=null">
+                customer_name=#{customer_name},
+            </if>
+            <if test="customer_type!=null">
+                customer_type=#{customer_type},
+            </if>
+        </set>
+    </insert>
+
+    <delete id="deleteCustomerTrack" parameterType="long">
+		delete from customer_track where id=#{id}
+	</delete>
+
+</mapper>

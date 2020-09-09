@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ocd.mapper.UserMapper">
+	<!--注册模块停用-->
+    <!-- saveUser()方法实现 -->
+<!--    <insert id="saveUser" parameterType="com.ocd.pojo.User">-->
+<!--		insert into sys_user (name,pwd) values (#{name},#{pwd})-->
+<!--	</insert>-->
+    <!-- findUser()方法实现 -->
+    <select id="findUser" resultType="com.ocd.pojo.User">
+	select  * from sys_user where name=#{name} and pwd=#{pwd}
+	</select>
+</mapper>
