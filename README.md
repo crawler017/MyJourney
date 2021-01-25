@@ -1,2 +1,2 @@
 # MyJourney
-I upload some stuff here.
+I upload stuff here.
